@@ -1,54 +1,27 @@
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
-const multer = require("multer");
-const cors = require("cors");
-const app = require('./app');
-// const app = express();
-// const clientRouter = require('./routes/clientRoutes');
+import express from "express";
+import dotenv from "dotenv";
+import mongoose from "mongoose";
+import cors from "cors";
+dotenv.config();
 
-dotenv.config({ path: "./env" });
+import userRouter from "./routes/userRoutes.js";
+import jobRouter from "./routes/jobRoutes.js";
+
+const app = express();
 app.use(cors());
+app.use(express.json());
 
-const db =
-  "mongodb+srv://namankulshresth:fTsXjzyjhFUUk56@cluster0.a9k9y92.mongodb.net/freelancershala?retryWrites=true&w=majority";
 mongoose
-  .connect(db, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then((con) => {
-    // console.log(con.connections);
-    console.log("DB connected successfully");
-  })
-  .catch((error) => {
-    console.error(`error: ${error}`);
-    process.exit(1);
+  .connect(process.env.DATABASE_URL)
+  .then(() => [console.log("\x1b[32mDB is connected successfully.\x1b[0m")])
+  .catch((err) => {
+    console.log("\x1b[31mDB connection failed !!\x1b[0m", err);
   });
 
-// Define storage for uploaded files
-const storage = multer.diskStorage({
-  destination: "./uploads/",
-  filename: (req, file, callback) => {
-    callback(null, file.originalname);
-  },
-});
+app.use("/users", userRouter);
+app.use("/jobs", jobRouter);
 
-const upload = multer({ storage: storage });
-
-// Serve the static files in the 'uploads' directory
-// app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-
-// Handle file upload
-app.post("/upload", upload.single("invoice"), (req, res) => {
-  console.log(req.file);
-  if (!req.file) {
-    return res.status(400).send("No file uploaded.");
-  }
-  res.send("File uploaded successfully.");
-});
-// const port = process.env.PORT || 5000;
-
-const port = 4000;
+const port = process.env.PORT;
 app.listen(port, () => {
-  console.log(`running on port ${port}`);
+  console.log(`\x1b[33mapp is running on port ${port}.\x1b[0m`);
 });

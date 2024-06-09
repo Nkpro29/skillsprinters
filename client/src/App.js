@@ -2,9 +2,9 @@ import "./App.css";
 import React from "react";
 import { Sidebar } from "./Components/Sidebar";
 import { Rbody } from "./Components/Rbody";
-import SignUp from "./Components/signup";
+import SignUp from "./Components/auth/signup";
 // import LandingPage from './pages/landingPage';
-import Login from "./Components/LoginPage";
+import Login from "./Components/auth/LoginPage";
 import { Outlet, Route, Routes } from "react-router";
 import LandingPage from "./pages/landingPage";
 import { DashBody } from "./Components/DashBody";
@@ -27,7 +27,7 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/" element={<LandingPage />}></Route>
         <Route
-          path="/user"
+          path="/freelancer"
           element={
             <div className="main">
               <Sidebar />
@@ -43,8 +43,6 @@ function App() {
           <Route path="projects" element={<Projects />} />
           <Route path="apply" element={<Apply />} />
           <Route path="contracts" element={<Contract />} />
-          <Route path="apply" element={<Apply />} />
-          <Route path="profile" element={<Profile />} />
           <Route path="*" element={"page not found"} />
         </Route>
       </Routes>

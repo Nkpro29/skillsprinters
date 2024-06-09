@@ -9,22 +9,22 @@ export const Header = (props) => {
      
   const [userData, setUserData] = useState([]);
 
-  useEffect(() => {
-    const fetchCurrentUser = async () => {
-      try {
-        const { data } = await supabase.auth.getUser();
-        if (data) {
-          console.log(data);
-          setUserData(data);
-          console.log('userData:',userData);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchCurrentUser = async () => {
+  //     try {
+  //       const { data } = await supabase.auth.getUser();
+  //       if (data) {
+  //         console.log(data);
+  //         setUserData(data);
+  //         console.log('userData:',userData);
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
 
-    fetchCurrentUser();
-  }, []);
+  //   fetchCurrentUser();
+  // }, []);
 
   return (
     <div className="head">
