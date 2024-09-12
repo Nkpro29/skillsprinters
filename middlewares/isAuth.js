@@ -1,41 +1,25 @@
 import jwt from "jsonwebtoken";
 
 const isAuth = (req, res, next) => {
-  const authHeader = req.get("Authorization");
-
-  if (!authHeader) {
-    return res.status(208).json({
-      isError: true,
-      authError: true,
-      message: "failed no token",
+  const authHeader = req.headers.authorization;
+  if(!authHeader && !authHeader.startsWith('Bearer ')){
+    return res.status(400).json({
+      status: "fail",
+      message: "user is unauthorized.",
     });
   }
-
-  const token = req.get('Authorization').split(" ")[1];
-  let decodedToken;
-
+  const token = authHeader.split(' ')[1];
   try {
-    decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    req.decodedToken = decodedToken.id; 
   } catch (error) {
-    return res.status(208).json({
-        isError: true,
-        authError: true,
-        message: "failed not good",
-      });
+    return res.status(500).json({
+      status: "fail",
+      message: "authorization failed.",
+    });
   }
-
-  if(!decodedToken){
-    return res.status(208).json({
-        isError: true,
-        authError: true,
-        message: "failed token expire.",
-      });
-  }
-
-  req.userId = decodedToken.id;
-
   next();
-
+  
 };
 
-export default isAuth;
+export default isAuth ;

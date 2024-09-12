@@ -5,7 +5,6 @@ import "../Components/Rbody.css";
 import { Routes, Route, Outlet } from "react-router";
 import WorkEnquiry from "../pages/WorkEnquiry";
 import InvoiceGenerator from "../pages/Invoice";
-import Profile from "../pages/ProfileManagement";
 import Projects from "../pages/Projects";
 import Contract from "./Contract";
 import { Sidebar } from "./Sidebar";

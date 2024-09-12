@@ -1,30 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../Components/Header.css";
 import bell from "../SVGs/bell.svg";
 import arrow from "../SVGs/arrow.svg";
 import search from "../SVGs/search.svg";
-import supabase from "../supabase";
+import Profile from "./profile/ProfileCarousel";
+import { Modal, Box } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 
 export const Header = (props) => {
-     
-  const [userData, setUserData] = useState([]);
 
-  // useEffect(() => {
-  //   const fetchCurrentUser = async () => {
-  //     try {
-  //       const { data } = await supabase.auth.getUser();
-  //       if (data) {
-  //         console.log(data);
-  //         setUserData(data);
-  //         console.log('userData:',userData);
-  //       }
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-
-  //   fetchCurrentUser();
-  // }, []);
+  const navigate = useNavigate();
 
   return (
     <div className="head">
@@ -35,19 +32,23 @@ export const Header = (props) => {
         </div>
       </div>
       <>
-        {/* <div className="b2 f">
+        <div className="b2 f">
           <input type="text" placeholder="Type to search" />
           <img src={search} alt="" />
-        </div> */}
+        </div>
         <div className="b3">
-          {/* <img src={bell} alt="" /> */}
+          <img src={bell} alt="" />
         </div>
         <div className="b4 f">
-          <div className="i1"></div>
+          <button onClick={() => {
+            navigate("/profile");
+          }}>
+            <div className="i1"></div>
+          </button>
           <div className="name2">Naman Kulshresth</div>
           <img src={arrow} alt="" />
         </div>
-      </>
+      </> 
     </div>
   );
 };

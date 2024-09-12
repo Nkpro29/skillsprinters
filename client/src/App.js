@@ -9,7 +9,7 @@ import { Outlet, Route, Routes } from "react-router";
 import LandingPage from "./pages/landingPage";
 import { DashBody } from "./Components/DashBody";
 import WorkEnquiry from "./pages/WorkEnquiry";
-import Profile from "./pages/ProfileManagement";
+import Profile from "./Components/profile/ProfileCarousel";
 import InvoiceGenerator from "./pages/Invoice";
 import Projects from "./pages/Projects";
 import Contract from "./Components/Contract";
@@ -26,6 +26,7 @@ function App() {
         <Route path="/signup" element={<SignUp />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/" element={<LandingPage />}></Route>
+        <Route path="/profile" element={<Profile />} />
         <Route
           path="/freelancer"
           element={
@@ -37,8 +38,7 @@ function App() {
         >
           <Route path="" element={<DashBody />} />
           {/* <Route path="workenquiry" element={<WorkEnquiry />} /> */}
-          <Route path="profile" element={<Profile />} />
-          <Route path="invoice" element={<InvoiceGenerator />}/>
+          <Route path="invoice" element={<InvoiceGenerator />} />
           <Route path="allinvoices" element={<InvoiceTable />} />
           <Route path="projects" element={<Projects />} />
           <Route path="apply" element={<Apply />} />
@@ -46,8 +46,6 @@ function App() {
           <Route path="*" element={"page not found"} />
         </Route>
       </Routes>
-
-
     </>
   );
 }

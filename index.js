@@ -2,10 +2,13 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
+
+
 dotenv.config();
 
 import userRouter from "./routes/userRoutes.js";
 import jobRouter from "./routes/jobRoutes.js";
+import freelancerRouter from "./routes/freelancerRoutes.js";
 
 const app = express();
 app.use(cors());
@@ -20,6 +23,7 @@ mongoose
 
 app.use("/users", userRouter);
 app.use("/jobs", jobRouter);
+app.use("/freelancer", freelancerRouter);
 
 const port = process.env.PORT;
 app.listen(port, () => {

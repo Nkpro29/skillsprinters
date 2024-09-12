@@ -13,7 +13,6 @@ const signToken = (id) => {
 const signUp = async (req, res) => {
   try {
     const { name, password, confirmPassword, email, role } = req.body;
-    console.log(email);
 
     if (password !== confirmPassword) {
       return res.status(400).json({
@@ -71,20 +70,22 @@ const login = async (req, res) => {
     }
 
     const user = await User.findOne({ email }).select("+password"); // check the user on the basis of email.
-    const correctPassword = await bcrypt.compare(password, user.password);
+    const correctPassword = await bcrypt.compare(`${password}`, user.password);
     if (!user || !correctPassword) {
       return res.status(401).json({
         status: "fail",
         message: "incorrect email or password",
       });
     }
+    const token = signToken(email);
 
     return res.status(200).json({
       status: "success",
       message: "user logged in successfully.",
+      token: token,
     });
-    
   } catch (error) {
+    console.log(error);
     return res.status(500).json({
       status: "fail",
       message: "internal server error",

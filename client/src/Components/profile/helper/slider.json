@@ -1,0 +1,49 @@
+[
+  {
+    "id": 1,
+    "inputTitle": [
+      {
+        "id": "name"
+      },
+      {
+        "id": "email"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "inputTitle": [
+      {
+        "id": "job title"
+      },
+      {
+        "id": "prefered income"
+      },
+      {
+        "id": "prefered location"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "inputTitle": [
+      {
+        "id": "address"
+      },
+      {
+        "id": "phone"
+      },
+      {
+        "id": "id proof"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "inputTitle": [
+      {
+        "id": "skills"
+      }
+    ]
+  }
+]
